@@ -1,3 +1,5 @@
+package TestActivities;
+
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,14 +16,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Activity13_2b {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = new FirefoxDriver();
         
         //Prepare the path of excel file
-        String filePath = "src/resources/sample.xlsx";
+        String filePath = "src/test/resources/sample.xlsx";
 
         //Create an object of current class
-        Activity14_2b srcExcel = new Activity14_2b();
+        Activity13_2b srcExcel = new Activity13_2b();
         
         //Call read file method of the class to read data
         List<List<String>> data = srcExcel.readExcel(filePath);
@@ -35,9 +37,10 @@ public class Activity13_2b {
         System.out.println("Page title is: " + pageTitle);
         
         //Get row 1 data
-        row = data.get(3);
+        row = data.get(0);
             
         //Find the input fields and enter text
+        
         WebElement firstName = driver.findElement(By.xpath("//input[@id = 'firstName']"));
         WebElement lastName = driver.findElement(By.xpath("//input[@id = 'lastName']"));
         
@@ -51,6 +54,7 @@ public class Activity13_2b {
         driver.findElement(By.xpath("//input[@id = 'number']")).sendKeys(row.get(4));
         
         //Click Submit
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//input[contains(@class, 'green')]")).click();
         
         //Switch to alert
